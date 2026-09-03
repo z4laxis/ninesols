@@ -1,5 +1,7 @@
 <script>
   import { MetaTags } from 'svelte-meta-tags';
+  import logo from '$lib/assets/img/logo.png';
+  import sandbox from '$lib/assets/img/bg/True_Ending_BG.jpg';
 </script>
 
 <MetaTags
@@ -13,5 +15,4 @@
   }}
 />
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<img alt="The project logo" src={logo} style="width: 100%; height: auto;" />S
