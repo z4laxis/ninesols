@@ -3,8 +3,17 @@
 
   import logo from '$lib/assets/img/logo.png';
   import bg from '$lib/assets/img/bg/Normal_BG.jpg';
-
   import MenuButton from '$lib/MenuButton.svelte';
+
+  const menuItems = [
+    { text: 'Start Game', action: play },
+    { text: 'Options', action: settings },
+    { text: 'Credits', action: credits },
+    { text: 'Discord', action: discord },
+    { text: 'Exit Game', action: exitGame }
+  ];
+
+  let selectedIndex = $state(0);
 
   function play() {
     console.log('Play');
@@ -19,73 +28,192 @@
   }
 
   function discord() {
-    open("https://discord.gg/redcandlegames", "_blank");
+    window.open('https://discord.gg/redcandlegames', '_blank', 'noopener,noreferrer');
   }
 
   function exitGame() {
-    history.back()
+    history.back();
   }
 
-  function hover(event) {
-    event.currentTarget.classList.add('hovered');  
-    console.log('Hovered');
+  function activateSelected() {
+    menuItems[selectedIndex].action();
+  }
+
+  function handleKeydown(event) {
+    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'S') {
+      event.preventDefault();
+      selectedIndex = (selectedIndex + 1) % menuItems.length;
     }
 
-  function unhover(event) {
-    event.currentTarget.classList.remove('hovered');  
-    console.log('Unhovered');
+    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'W') {
+      event.preventDefault();
+      selectedIndex = (selectedIndex - 1 + menuItems.length) % menuItems.length;
     }
+
+    if (event.key === 'Enter' || event.key === 'z' || event.key === 'Z' || event.key === ' ') {
+      event.preventDefault();
+      activateSelected();
+    }
+  }
 </script>
 
-<style>
-  :global(body) {
-    margin: 0;
-    overflow: hidden;
-  }
-
-  .logo {
-    width: 13%;
-    position: absolute;
-    z-index: 1;
-    left: 13%;
-    top: 11%;
-  }
-
-  .menu-buttons {
-    width: 20%;
-    position: absolute;
-    z-index: 9;
-    left: 12%;
-    top: 57.5%;
-    display: flex;
-    flex-direction: column;
-  }
-</style>
+<svelte:window onkeydown={handleKeydown} />
 
 <MetaTags
   title="Nine Sols"
-  description="A short description of this page."
-  canonical="https://example.com/my-page"
+  description="Nine Sols main menu recreation."
+  canonical="https://example.com/"
   openGraph={{
     title: 'Nine Sols',
-    description: 'A short description of this page.',
-    images: [{ url: {logo}, width: 1200, height: 630, alt: 'Nine Sols' }]
+    description: 'Nine Sols main menu recreation.',
+    images: [{ url: logo, width: 1200, height: 630, alt: 'Nine Sols' }]
   }}
 />
 
-<div style="display: contents">
-  <div style="position: absolute;width: 100%;height: 100%;top: 0;left: 0;box-shadow: inset 10em 1em 100px #000;overflow: hidden;z-index: 1;pointer-events: none;opacity: 0;"></div>
-  <div style="position: absolute;width: 100%;height: 100%;top: 0;/*! left: 5%; */box-shadow: inset 10em 1em 1000px #000;overflow: hidden;z-index: 1;pointer-events: none;/*! opacity: 0.2; *//*! transform: scaleX(1.1); */background: rgba(0, 0, 0, 0.1);"></div>
-</div>
+<svelte:head>
+  <title>Nine Sols</title>
+</svelte:head>
 
-<div class="menu-buttons">
-    <MenuButton text="❘ Start Game" onclick={play} />
-    <MenuButton text="❘ Options" onclick={settings} />
-    <MenuButton text="❘ Credits" onclick={credits} />
-    <MenuButton text="❘ Discord" onclick={discord} />
-    <MenuButton text="❘ Exit Game" onclick={exitGame} />
-</div>
+<main class="menu-screen">
+  <img class="background" src={bg} alt="" aria-hidden="true" />
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="bottom-fade" aria-hidden="true"></div>
 
-<img alt="Nine Sols Logo" src={logo} class="logo" />
-<!--<img alt="Sandbox Background" src="https://www.gameuidatabase.com/uploads/Nine-Sols12282024-070345-33433.jpg" style="width: 100%; height: 100%; object-fit: cover;" />-->
-<img alt="Sandbox Background" src={bg} style="width: 100%; height: 100%; object-fit: cover;" />
+  <img class="logo" src={logo} alt="Nine Sols" />
+
+  <nav class="menu-buttons" aria-label="Main menu">
+    {#each menuItems as item, index}
+      <MenuButton
+        text={item.text}
+        active={selectedIndex === index}
+        onclick={item.action}
+        onhover={() => selectedIndex = index}
+      />
+    {/each}
+  </nav>
+
+  <div class="controls" aria-hidden="true">
+    <span><b>Z</b> Confirm</span>
+    <span><b>X</b> Back</span>
+  </div>
+</main>
+
+<style>
+  :global(html),
+  :global(body) {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #07151a;
+  }
+
+  :global(body) {
+    font-family: 'Noto Sans', sans-serif;
+  }
+
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  .menu-screen {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    min-height: 540px;
+    overflow: hidden;
+    background: #07151a;
+    isolation: isolate;
+  }
+
+  .background {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .vignette {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 42% 42%, transparent 18%, rgba(0, 0, 0, 0.08) 48%, rgba(0, 0, 0, 0.58) 100%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0.12) 34%, rgba(0, 0, 0, 0.02) 68%, rgba(0, 0, 0, 0.18) 100%);
+  }
+
+  .bottom-fade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 19%;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(to bottom, transparent, rgba(3, 15, 27, 0.78));
+  }
+
+  .logo {
+    position: absolute;
+    z-index: 1;
+    top: 9.5%;
+    left: 11.5%;
+    width: clamp(180px, 17.5vw, 336px);
+    height: auto;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .menu-buttons {
+    position: absolute;
+    z-index: 2;
+    top: 53.5%;
+    left: 11.7%;
+    display: flex;
+    width: max-content;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .controls {
+    position: absolute;
+    z-index: 2;
+    left: 11.7%;
+    bottom: 4.5%;
+    display: flex;
+    gap: 1.25rem;
+    color: rgba(236, 216, 154, 0.48);
+    font-size: clamp(0.65rem, 0.7vw, 0.82rem);
+    letter-spacing: 0.01em;
+    pointer-events: none;
+  }
+
+  .controls b {
+    color: rgba(236, 216, 154, 0.72);
+    font-weight: 500;
+  }
+
+  @media (max-width: 700px) {
+    .logo {
+      top: 8%;
+      left: 9%;
+      width: 45vw;
+    }
+
+    .menu-buttons {
+      top: 51%;
+      left: 9%;
+    }
+
+    .controls {
+      left: 9%;
+      bottom: 3%;
+    }
+  }
+</style>
