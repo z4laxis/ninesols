@@ -25,7 +25,6 @@
         width: 1px;
         height: 66%;
         background: rgba(236, 216, 154, 0.56);
-        transition: height 0.1s ease, top 0.1s ease, background 0.1s ease;
     }
 
     .button-wrap::after {
@@ -37,7 +36,6 @@
         border-radius: 999px;
         opacity: 0;
         transform: rotate(-1deg) scale(0.98);
-        transition: opacity 0.08s ease, transform 0.08s ease;
         pointer-events: none;
     }
 

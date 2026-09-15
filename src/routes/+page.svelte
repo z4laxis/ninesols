@@ -61,11 +61,11 @@
 
 <MetaTags
   title="Nine Sols"
-  description="Nine Sols main menu recreation."
+  description="Nine Sols unofficial website."
   canonical="https://example.com/"
   openGraph={{
     title: 'Nine Sols',
-    description: 'Nine Sols main menu recreation.',
+    description: 'Nine Sols unofficial website.',
     images: [{ url: logo, width: 1200, height: 630, alt: 'Nine Sols' }]
   }}
 />
@@ -76,8 +76,7 @@
 
 <main class="menu-screen">
   <img class="background" src={bg} alt="" aria-hidden="true" />
-  <div class="vignette" aria-hidden="true"></div>
-  <div class="bottom-fade" aria-hidden="true"></div>
+<div style="display: contents"><div style="position: absolute;width: 100%;height: 100%;top: 0;left: 0;box-shadow: inset 10em 1em 100px #000;overflow: hidden;z-index: 1;pointer-events: none;opacity: 0;"></div> <div style="position: absolute;width: 100%;height: 100%;top: 0;/*! left: 5%; */box-shadow: inset 10em 1em 1000px #000;overflow: hidden;z-index: 1;pointer-events: none;/*! opacity: 0.2; *//*! transform: scaleX(1.1); */background: rgba(0, 0, 0, 0.1);"></div></div>
 
   <img class="logo" src={logo} alt="Nine Sols" />
 
@@ -160,14 +159,11 @@
   }
 
   .logo {
-    position: absolute;
-    z-index: 1;
-    top: 9.5%;
-    left: 11.5%;
-    width: clamp(180px, 17.5vw, 336px);
-    height: auto;
-    user-select: none;
-    -webkit-user-drag: none;
+  z-index: 1;
+  width: 13%;
+  position: absolute;
+  top: 11%;
+  left: 13%;
   }
 
   .menu-buttons {
