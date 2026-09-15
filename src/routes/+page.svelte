@@ -1,61 +1,6 @@
-<script>
-  import { MetaTags } from 'svelte-meta-tags';
-
-  import logo from '$lib/assets/img/logo.png';
-  import bg from '$lib/assets/img/bg/Normal_BG.jpg';
-  import MenuButton from '$lib/MenuButton.svelte';
-
-  const menuItems = [
-    { text: 'Start Game', action: play },
-    { text: 'Options', action: settings },
-    { text: 'Credits', action: credits },
-    { text: 'Discord', action: discord },
-    { text: 'Exit Game', action: exitGame }
-  ];
-
-  let selectedIndex = $state(0);
-
-  function play() {
-    console.log('Play');
-  }
-
-  function settings() {
-    console.log('Settings');
-  }
-
-  function credits() {
-    console.log('Credits');
-  }
-
-  function discord() {
-    window.open('https://discord.gg/redcandlegames', '_blank', 'noopener,noreferrer');
-  }
-
-  function exitGame() {
-    history.back();
-  }
-
-  function activateSelected() {
-    menuItems[selectedIndex].action();
-  }
-
-  function handleKeydown(event) {
-    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'S') {
-      event.preventDefault();
-      selectedIndex = (selectedIndex + 1) % menuItems.length;
-    }
-
-    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'W') {
-      event.preventDefault();
-      selectedIndex = (selectedIndex - 1 + menuItems.length) % menuItems.length;
-    }
-
-    if (event.key === 'Enter' || event.key === 'z' || event.key === 'Z' || event.key === ' ') {
-      event.preventDefault();
-      activateSelected();
-    }
-  }
-</script>
+<svelte:head>
+  <title>Nine Sols</title>
+</svelte:head>
 
 <svelte:window onkeydown={handleKeydown} />
 
@@ -70,13 +15,146 @@
   }}
 />
 
-<svelte:head>
-  <title>Nine Sols</title>
-</svelte:head>
+<div class="credits">
+    <h1>Credits</h1>
 
-<main class="menu-screen">
+    <div class="credit-section">
+        <div class="credit-header">
+            <span>網站</span>
+            <span>Website</span>
+        </div>
+
+        <div class="credit-row">
+            <span>札拉西斯</span>
+            <span>Zalaxis</span>
+        </div>
+
+        <div class="credit-row">
+            <span>德羅特孔</span>
+            <span>XDrotkon</span>
+        </div>
+    </div>
+    
+    <br>
+
+    <div class="credit-section">
+        <div class="credit-header">
+            <span>製作人</span>
+            <span>Producer</span>
+        </div>
+
+        <div class="credit-row">
+            <span>楊邁維</span>
+            <span>Vincent Yang</span>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="credit-section">
+        <div class="credit-header">
+            <span>創作群</span>
+            <span>Creators</span>
+        </div>
+
+        <div class="credit-row">
+            <span>王光昊</span>
+            <span>Light Wang</span>
+        </div>
+
+        <div class="credit-row">
+            <span>王瀚宇</span>
+            <span>Henry Wang</span>
+        </div>
+
+        <div class="credit-row">
+            <span>何霧君</span>
+            <span>Pege Ho</span>
+        </div>
+
+        <div class="credit-row">
+            <span>姚舜庭</span>
+            <span>Coffee Yao</span>
+        </div>
+
+        <div class="credit-row">
+            <span>陳敬恆</span>
+            <span>Finger Chen</span>
+        </div>
+
+        <div class="credit-row">
+            <span>徐嘉陞</span>
+            <span>Smiler Hsu</span>
+        </div>
+
+        <div class="credit-row">
+            <span>張兆鴻</span>
+            <span>Tata Cheong</span>
+        </div>
+
+        <div class="credit-row">
+            <span>詹易衡</span>
+            <span>Jerryee Chan</span>
+        </div>
+
+        <div class="credit-row">
+            <span>楊邁維</span>
+            <span>Vincent Yang</span>
+        </div>
+
+        <div class="credit-row">
+            <span>簡廷任</span>
+            <span>Minus Chien</span>
+        </div>
+
+        <div class="credit-row">
+            <span>黨傳翔</span>
+            <span>Dang Chuan-Hsiang</span>
+        </div>
+
+        <div class="credit-row">
+            <span>林昇翰</span>
+            <span>Sheng-Han Lin</span>
+        </div>
+
+        <div class="credit-row">
+            <span>江東昱</span>
+            <span>Doy Chiang</span>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="credit-section">
+        <div class="credit-header">
+            <span>作曲家</span>
+            <span>Composer</span>
+        </div>
+
+        <div class="credit-row">
+            <span>無聲聚會</span>
+            <span>Silence Party</span>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="credit-section">
+        <div class="credit-header">
+            <span>發行商</span>
+            <span>Publisher</span>
+        </div>
+
+        <div class="credit-row">
+            <span>赤燭遊戲</span>
+            <span>RedCandleGames</span>
+        </div>
+    </div>
+</div>
+
+<div class="menu-screen">
   <img class="background" src={bg} alt="" aria-hidden="true" />
-<div style="display: contents"><div style="position: absolute;width: 100%;height: 100%;top: 0;left: 0;box-shadow: inset 10em 1em 100px #000;overflow: hidden;z-index: 1;pointer-events: none;opacity: 0;"></div> <div style="position: absolute;width: 100%;height: 100%;top: 0;/*! left: 5%; */box-shadow: inset 10em 1em 1000px #000;overflow: hidden;z-index: 1;pointer-events: none;/*! opacity: 0.2; *//*! transform: scaleX(1.1); */background: rgba(0, 0, 0, 0.1);"></div></div>
+  <div style="display: contents"><div style="position: absolute;width: 100%;height: 100%;top: 0;left: 0;box-shadow: inset 10em 1em 100px #000;overflow: hidden;z-index: 1;pointer-events: none;opacity: 0;"></div> <div style="position: absolute;width: 100%;height: 100%;top: 0;/*! left: 5%; */box-shadow: inset 10em 1em 1000px #000;overflow: hidden;z-index: 1;pointer-events: none;/*! opacity: 0.2; *//*! transform: scaleX(1.1); */background: rgba(0, 0, 0, 0.1);"></div></div>
 
   <img class="logo" src={logo} alt="Nine Sols" />
 
@@ -92,10 +170,10 @@
   </nav>
 
   <div class="controls" aria-hidden="true">
-    <span><b>Z</b> Confirm</span>
+    <span><b>E</b> Confirm</span>
     <span><b>X</b> Back</span>
   </div>
-</main>
+</div>
 
 <style>
   :global(html),
@@ -104,7 +182,7 @@
     height: 100%;
     margin: 0;
     overflow: hidden;
-    background: #07151a;
+    background: #000;
   }
 
   :global(body) {
@@ -195,6 +273,55 @@
     font-weight: 500;
   }
 
+  .credits {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    background: #000;
+    display: none;
+  }
+
+  .credits h1 {
+    margin: 40px 0 40px;
+    font-size: 30px;
+    font-weight: 400;
+  }
+
+  .credit-section {
+  width: 275px;
+  margin: 0 auto;
+  position: relative;
+  left: 50px;
+  }
+
+  .credit-header,
+  .credit-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    text-align: left;
+  }
+
+  .credit-header {
+    margin-bottom: 4px;
+    color: #6bff85;
+  }
+
+  .credit-row {
+    line-height: 1.5;
+  }
+
+  .credit-header span:first-child,
+  .credit-row span:first-child {
+    text-align: right;
+    padding-right: 50px;
+  }
+
+  .credit-header span:last-child,
+  .credit-row span:last-child {
+    text-align: left;
+  }
+  
   @media (max-width: 700px) {
     .logo {
       top: 8%;
@@ -213,3 +340,75 @@
     }
   }
 </style>
+
+<script>
+  import { MetaTags } from 'svelte-meta-tags';
+
+  import logo from '$lib/assets/img/logo.png';
+  import bg from '$lib/assets/img/bg/Normal_BG.jpg';
+  import MenuButton from '$lib/MenuButton.svelte';
+
+  const menuItems = [
+    { text: 'Start Game', action: play },
+    { text: 'Options', action: settings },
+    { text: 'Credits', action: credits },
+    { text: 'Discord', action: discord },
+    { text: 'Exit Game', action: exitGame }
+  ];
+
+  let selectedIndex = $state(0);
+
+  function play() {
+    console.log('Play');
+  }
+
+  function settings() {
+    console.log('Settings');
+  }
+
+  function credits() {
+    if (document.querySelector(".credits").style.display === "block") {
+      document.querySelector(".credits").style.display = "none";
+    } else {
+      document.querySelector(".credits").style.display = "block";
+    }
+  }
+
+  function discord() {
+    window.open('https://discord.gg/redcandlegames', '_blank', 'noopener,noreferrer');
+  }
+
+  function exitGame() {
+    if (history.length > 2) {
+      window.History.back();
+    } else {
+      window.History.replaceState(null, null, '/');
+    }
+  }
+
+  function activateSelected() {
+    menuItems[selectedIndex].action();
+  }
+
+  function handleKeydown(event) {
+    if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'S') {
+      event.preventDefault();
+      selectedIndex = (selectedIndex + 1) % menuItems.length;
+    }
+
+    if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'W') {
+      event.preventDefault();
+      selectedIndex = (selectedIndex - 1 + menuItems.length) % menuItems.length;
+    }
+
+    if (event.key === 'X' || event.key === 'x') {
+      event.preventDefault();
+      credits();
+    }
+
+    if (event.key === 'Enter' || event.key === 'z' || event.key === 'Z' || event.key === ' ') {
+      event.preventDefault();
+      activateSelected();
+    }
+  }
+</script>
