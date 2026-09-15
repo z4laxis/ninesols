@@ -27,18 +27,6 @@
         background: rgba(236, 216, 154, 0.56);
     }
 
-    .button-wrap::after {
-        content: '';
-        position: absolute;
-        z-index: -1;
-        inset: -3px -10px -3px -6px;
-        border: 2px solid #d83b35;
-        border-radius: 999px;
-        opacity: 0;
-        transform: rotate(-1deg) scale(0.98);
-        pointer-events: none;
-    }
-
     .button-wrap.hovered::before,
     .button-wrap.active::before {
         top: 13%;
@@ -49,13 +37,12 @@
     .button-wrap.hovered::after,
     .button-wrap.active::after {
         opacity: 1;
-        transform: rotate(-1deg) scale(1);
     }
 
     button {
         display: block;
         padding: 0;
-        margin: 0;
+        margin: 0px 0px 10px 0px;
         border: 0;
         outline: 0;
         background: none;
@@ -69,7 +56,6 @@
         cursor: pointer;
         opacity: 0.48;
         transform-origin: left center;
-        transition: font-size 0.1s ease, opacity 0.1s ease, transform 0.1s ease;
     }
 
     .button-wrap.hovered button,
